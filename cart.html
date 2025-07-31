@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - MUGEEZ CLOSET</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #f9f9f9;
+            color: #222;
+        }
+
+        header {
+            background: white;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        header h1 {
+            font-weight: 800;
+            font-size: 24px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #444;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff4e8c;
+        }
+
+        .contact-section {
+            padding: 50px 10%;
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .contact-section h2 {
+            text-align: center;
+            color: #ff4e8c;
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: none;
+            height: 120px;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background: #ff4e8c;
+            color: white;
+            border: none;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff256e;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+    </style>
+
+    <script>
+        function sendMessage() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let messageBody = document.getElementById("message").value;
+
+            if (!name || !email || !messageBody) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            let message = `📩 NEW MESSAGE from MUGEEZ CLOSET Website\n\n👤 Name: ${name}\n📧 Email: ${email}\n💬 Message: ${messageBody}`;
+
+            let phoneNumber = "233507930017";
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappURL, "_blank");
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://files.catbox.moe/pbv0rg.jpg" alt="MUGEEZ CLOSET Logo" class="logo">
+            <h1>MUGEEZ CLOSET</h1>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="cart.html">Cart</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="contact-section">
+        <h2>Contact Us</h2>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="Enter your name">
+
+        <label for="email">Your Email</label>
+        <input type="email" id="email" placeholder="Enter your email">
+
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Type your message here..."></textarea>
+
+        <button onclick="sendMessage()">Send Message via WhatsApp</button>
+
+        <div class="contact-info">
+            <p><strong>Phone:</strong> +233 50 793 0017</p>
+            <p><strong>Location:</strong> Japekrom Main Market</p>
+            <p><strong>Theme:</strong> Your outfit is our concern</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 MUGEEZ CLOSET | Fashion for the Modern You</p>
+    </footer>
+
+</body>
+</html>
