@@ -1,190 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUGEEZ CLOSET - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: #f9f9f9;
-            color: #222;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUGEEZ CLOSET - Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+        background: #f9f9f9;
+        color: #222;
+    }
 
-        header {
+    /* HEADER */
+    header {
+        background: white;
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo {
+        height: 50px;
+        border-radius: 8px;
+    }
+
+    header h1 {
+        font-weight: 800;
+        font-size: 22px;
+    }
+
+    /* NAVIGATION */
+    nav {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #444;
+        font-weight: 600;
+        font-size: 15px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    nav a:hover {
+        background: #ff4e8c;
+        color: white;
+        box-shadow: 0 4px 12px rgba(255, 78, 140, 0.3);
+    }
+
+    nav a.active {
+        background: #ff4e8c;
+        color: white;
+        box-shadow: 0 4px 12px rgba(255, 78, 140, 0.3);
+    }
+
+    /* CART BADGE */
+    .cart-badge {
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: red;
+        color: white;
+        font-size: 11px;
+        padding: 2px 5px;
+        border-radius: 50%;
+    }
+
+    /* MOBILE MENU */
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+    }
+
+    .menu-toggle div {
+        width: 25px;
+        height: 3px;
+        background: #444;
+        border-radius: 3px;
+    }
+
+    @media (max-width: 768px) {
+        nav {
+            display: none;
+            flex-direction: column;
             background: white;
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo {
-            height: 50px;
-            width: auto;
-            border-radius: 8px;
-        }
-
-        header h1 {
-            font-weight: 800;
-            font-size: 24px;
-        }
-
-        nav a {
-            position: relative;
-            text-decoration: none;
-            color: #444;
-            margin-left: 20px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #ff4e8c;
-        }
-
-        .cart-badge {
             position: absolute;
-            top: -8px;
-            right: -12px;
-            background: red;
-            color: white;
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 50%;
-        }
-
-        .hero {
-            height: 80vh;
-            background: url('https://files.catbox.moe/vdu2sa.jpg') center/cover no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-        }
-
-        .hero-content {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 30px;
-            border-radius: 15px;
-        }
-
-        .hero h2 {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 25px;
-        }
-
-        .hero a {
-            padding: 12px 25px;
-            background: #ff4e8c;
-            color: white;
-            font-weight: 600;
-            border-radius: 25px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .hero a:hover {
-            background: #ff256e;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 50px 10%;
-        }
-
-        .feature {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        .feature h3 {
-            color: #ff4e8c;
-            margin-bottom: 10px;
-        }
-
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
+            top: 70px;
+            right: 5%;
+            width: 200px;
             padding: 15px;
-            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
         }
-    </style>
-    <script>
-        function updateCartBadge() {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            document.getElementById("cartBadge").innerText = totalItems;
+
+        nav.active {
+            display: flex;
         }
-        window.onload = updateCartBadge;
-    </script>
+
+        .menu-toggle {
+            display: flex;
+        }
+    }
+
+    /* HERO */
+    .hero {
+        height: 80vh;
+        background: url('https://files.catbox.moe/vdu2sa.jpg') center/cover no-repeat;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        padding: 0 20px;
+    }
+
+    .hero-content {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 30px;
+        border-radius: 15px;
+    }
+
+    .hero h2 {
+        font-size: 42px;
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        font-size: 17px;
+        margin-bottom: 25px;
+    }
+
+    .hero a {
+        padding: 12px 25px;
+        background: #ff4e8c;
+        color: white;
+        font-weight: 600;
+        border-radius: 25px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .hero a:hover {
+        background: #ff256e;
+    }
+
+    /* FEATURES */
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 50px 10%;
+    }
+
+    .feature {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .feature h3 {
+        color: #ff4e8c;
+        margin-bottom: 10px;
+    }
+
+    footer {
+        background: #222;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 30px;
+    }
+</style>
+<script>
+    function updateCartBadge() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        document.getElementById("cartBadge").innerText = totalItems;
+    }
+    window.onload = updateCartBadge;
+
+    function toggleMenu() {
+        document.querySelector("nav").classList.toggle("active");
+    }
+</script>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <img src="https://files.catbox.moe/pbv0rg.jpg" alt="MUGEEZ CLOSET Logo" class="logo">
-            <h1>MUGEEZ CLOSET</h1>
-        </div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="cart.html">Cart <span id="cartBadge" class="cart-badge">0</span></a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+<header>
+    <div class="logo-container">
+        <img src="https://files.catbox.moe/pbv0rg.jpg" alt="MUGEEZ CLOSET Logo" class="logo">
+        <h1>MUGEEZ CLOSET</h1>
+    </div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Your Outfit is Our Concern</h2>
-            <p>Trendy styles, perfect fits, and unbeatable prices. Shop now and elevate your wardrobe!</p>
-            <a href="shop.html">Shop Now</a>
-        </div>
-    </section>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
-    <section class="features">
-        <div class="feature">
-            <h3>Quality Materials</h3>
-            <p>We source the best fabrics for lasting comfort and durability.</p>
-        </div>
-        <div class="feature">
-            <h3>Affordable Prices</h3>
-            <p>Get fashionable pieces without breaking the bank.</p>
-        </div>
-        <div class="feature">
-            <h3>Fast Delivery</h3>
-            <p>Your orders delivered quickly and safely to your doorstep.</p>
-        </div>
-    </section>
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="cart.html">Cart <span id="cartBadge" class="cart-badge">0</span></a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
 
-    <footer>
-        <p>&copy; 2025 MUGEEZ CLOSET | Fashion for the Modern You</p>
-    </footer>
+<section class="hero">
+    <div class="hero-content">
+        <h2>Your Outfit is Our Concern</h2>
+        <p>Trendy styles, perfect fits, and unbeatable prices. Shop now and elevate your wardrobe!</p>
+        <a href="shop.html">Shop Now</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <h3>Quality Materials</h3>
+        <p>We source the best fabrics for lasting comfort and durability.</p>
+    </div>
+    <div class="feature">
+        <h3>Affordable Prices</h3>
+        <p>Get fashionable pieces without breaking the bank.</p>
+    </div>
+    <div class="feature">
+        <h3>Fast Delivery</h3>
+        <p>Your orders delivered quickly and safely to your doorstep.</p>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 MUGEEZ CLOSET | Fashion for the Modern You</p>
+</footer>
 
 </body>
 </html>
