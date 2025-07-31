@@ -3,177 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - MUGEEZ CLOSET</title>
+    <title>Cart - MUGEEZ CLOSET</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: #f9f9f9;
-            color: #222;
-        }
-
-        header {
-            background: white;
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo {
-            height: 50px;
-            width: auto;
-            border-radius: 8px;
-        }
-
-        header h1 {
-            font-weight: 800;
-            font-size: 24px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #444;
-            margin-left: 20px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: #ff4e8c;
-        }
-
-        .contact-section {
-            padding: 50px 10%;
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-
-        .contact-section h2 {
-            text-align: center;
-            color: #ff4e8c;
-            margin-bottom: 30px;
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: 600;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-family: inherit;
-        }
-
-        textarea {
-            resize: none;
-            height: 120px;
-        }
-
-        button {
-            margin-top: 20px;
-            width: 100%;
-            padding: 12px;
-            background: #ff4e8c;
-            color: white;
-            border: none;
-            font-weight: 600;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #ff256e;
-        }
-
-        .contact-info {
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .contact-info p {
-            margin: 5px 0;
-        }
+        body { font-family: 'Montserrat', sans-serif; margin: 0; background: #f9f9f9; }
+        header { background: white; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+        .logo { height: 50px; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; border-radius: 10px; overflow: hidden; }
+        th, td { padding: 12px; text-align: center; }
+        th { background: #ff4e8c; color: white; }
+        tr:nth-child(even) { background: #f8f8f8; }
+        input, select { width: 100%; padding: 10px; margin: 5px 0; border-radius: 8px; border: 1px solid #ccc; }
+        button { background: #ff4e8c; color: white; padding: 12px; border: none; border-radius: 25px; width: 100%; font-weight: 600; cursor: pointer; }
+        button:hover { background: #ff256e; }
+        .container { padding: 30px 10%; }
     </style>
-
     <script>
-        function sendMessage() {
-            let name = document.getElementById("name").value;
-            let email = document.getElementById("email").value;
-            let messageBody = document.getElementById("message").value;
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let table = document.getElementById("cartTable");
+            let total = 0;
+            table.innerHTML = "";
+            cart.forEach((item, i) => {
+                let itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                table.innerHTML += `
+                    <tr>
+                        <td><img src="${item.image}" width="50"></td>
+                        <td>${item.name}</td>
+                        <td>₵${item.price}</td>
+                        <td>${item.quantity}</td>
+                        <td>₵${itemTotal.toFixed(2)}</td>
+                    </tr>
+                `;
+            });
+            document.getElementById("total").innerText = "₵" + total.toFixed(2);
+        }
 
-            if (!name || !email || !messageBody) {
-                alert("Please fill in all fields.");
+        function checkout() {
+            let name = document.getElementById("custName").value;
+            let phone = document.getElementById("custPhone").value;
+            let address = document.getElementById("custAddress").value;
+            let payment = document.getElementById("payment").value;
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            if (!name || !phone || !address) {
+                alert("Please fill in all details.");
                 return;
             }
 
-            let message = `📩 NEW MESSAGE from MUGEEZ CLOSET Website\n\n👤 Name: ${name}\n📧 Email: ${email}\n💬 Message: ${messageBody}`;
+            let orderMsg = `🛍 MUGEEZ CLOSET - New Order\n\n`;
+            cart.forEach(item => {
+                orderMsg += `📌 ${item.name} - ₵${item.price} x ${item.quantity} = ₵${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            orderMsg += `\n💰 Total: ₵${document.getElementById("total").innerText.replace("₵","")}\n`;
+            orderMsg += `\n👤 Name: ${name}\n📞 Phone: ${phone}\n🏠 Address: ${address}\n💳 Payment Method: ${payment}\n`;
+
+            if (payment === "Pay Before Delivery") {
+                orderMsg += `\nPlease provide your account number so that I can pay for my products.\n`;
+            }
+
+            orderMsg += `\nPlease let me know when you will deliver.`;
 
             let phoneNumber = "233507930017";
-            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderMsg)}`;
             window.open(whatsappURL, "_blank");
         }
+
+        window.onload = loadCart;
     </script>
 </head>
 <body>
-
     <header>
-        <div class="logo-container">
-            <img src="https://files.catbox.moe/pbv0rg.jpg" alt="MUGEEZ CLOSET Logo" class="logo">
-            <h1>MUGEEZ CLOSET</h1>
+        <div>
+            <img src="https://files.catbox.moe/pbv0rg.jpg" class="logo"> 
+            <strong>MUGEEZ CLOSET</strong>
         </div>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="cart.html">Cart</a>
+            <a href="index.html">Home</a> | 
+            <a href="shop.html">Shop</a> | 
+            <a href="cart.html">Cart</a> | 
             <a href="contact.html">Contact</a>
         </nav>
     </header>
 
-    <section class="contact-section">
-        <h2>Contact Us</h2>
-        <label for="name">Your Name</label>
-        <input type="text" id="name" placeholder="Enter your name">
+    <div class="container">
+        <h2>Your Cart</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Product</th>
+                    <th>Price (₵)</th>
+                    <th>Qty</th>
+                    <th>Total (₵)</th>
+                </tr>
+            </thead>
+            <tbody id="cartTable"></tbody>
+        </table>
+        <h3>Total: <span id="total">₵0.00</span></h3>
 
-        <label for="email">Your Email</label>
-        <input type="email" id="email" placeholder="Enter your email">
-
-        <label for="message">Message</label>
-        <textarea id="message" placeholder="Type your message here..."></textarea>
-
-        <button onclick="sendMessage()">Send Message via WhatsApp</button>
-
-        <div class="contact-info">
-            <p><strong>Phone:</strong> +233 50 793 0017</p>
-            <p><strong>Location:</strong> Japekrom Main Market</p>
-            <p><strong>Theme:</strong> Your outfit is our concern</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 MUGEEZ CLOSET | Fashion for the Modern You</p>
-    </footer>
-
+        <h2>Customer Details</h2>
+        <input type="text" id="custName" placeholder="Your Name">
+        <input type="tel" id="custPhone" placeholder="Your Phone Number">
+        <input type="text" id="custAddress" placeholder="Your Address">
+        <select id="payment">
+            <option>Pay on Delivery</option>
+            <option>Pay Before Delivery</option>
+        </select>
+        <button onclick="checkout()">Checkout via WhatsApp</button>
+    </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
