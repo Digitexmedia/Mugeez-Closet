@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - MUGEEZ CLOSET</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ff4e8c;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ff4e8c;
+            color: white;
+            font-weight: 600;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff256e;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+
+    <script>
+        function loginAdmin() {
+            let password = document.getElementById("password").value;
+            let error = document.getElementById("error-msg");
+
+            if (password === "Don14") {
+                // Store admin session
+                localStorage.setItem("isAdmin", "true");
+                window.location.href = "admin-dashboard.html";
+            } else {
+                error.style.display = "block";
+            }
+        }
+
+        // If already logged in, skip login page
+        window.onload = function() {
+            if (localStorage.getItem("isAdmin") === "true") {
+                window.location.href = "admin-dashboard.html";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <input type="password" id="password" placeholder="Enter Password">
+        <button onclick="loginAdmin()">Login</button>
+        <p id="error-msg" class="error">Incorrect password!</p>
+    </div>
+
+</body>
+</html>
