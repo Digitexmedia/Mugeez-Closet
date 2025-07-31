@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - MUGEEZ CLOSET</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #f9f9f9;
+            color: #222;
+        }
+
+        /* HEADER */
+        header {
+            background: white;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        header h1 {
+            font-weight: 800;
+            font-size: 24px;
+            color: #000;
+        }
+        nav a {
+            text-decoration: none;
+            color: #444;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #ff4e8c;
+        }
+
+        /* CONTACT SECTION */
+        .contact {
+            padding: 50px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            align-items: start;
+        }
+        .contact-info {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .contact-info h2 {
+            color: #ff4e8c;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .contact-info p {
+            margin: 10px 0;
+        }
+        .contact-info a {
+            color: #ff4e8c;
+            text-decoration: none;
+        }
+
+        /* FORM */
+        .contact-form {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .contact-form h2 {
+            color: #ff4e8c;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .contact-form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 600;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: none;
+            outline: none;
+            transition: border 0.3s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #ff4e8c;
+        }
+        .contact-form button {
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: #ff4e8c;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .contact-form button:hover {
+            background: #ff256e;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+    </style>
+
+    <script>
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+
+            let phoneNumber = "233507930017"; // Your WhatsApp number
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=` +
+                encodeURIComponent(`📩 New Message from MUGEEZ CLOSET\n\n👤 Name: ${name}\n📧 Email: ${email}\n💬 Message: ${message}`);
+
+            window.open(whatsappURL, "_blank");
+        }
+    </script>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>MUGEEZ CLOSET</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="cart.html">Cart</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact">
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <p><strong>Phone:</strong> <a href="tel:+233507930017">+233 507 930 017</a></p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/233507930017">Chat Now</a></p>
+            <p><strong>Email:</strong> <a href="mailto:info@mugheezcloset.com">info@mugheezcloset.com</a></p>
+            <p><strong>Location:</strong> Japekrom Main Market, Ghana</p>
+            <p><strong>Theme:</strong> Your Outfit is Our Concern</p>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form onsubmit="sendToWhatsApp(event)">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+
+                <label for="email">Your Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" rows="5" placeholder="Write your message" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 MUGEEZ CLOSET | Fashion for the Modern You</p>
+    </footer>
+
+</body>
+</html>
