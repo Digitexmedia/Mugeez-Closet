@@ -43,6 +43,7 @@
         }
 
         nav a {
+            position: relative;
             text-decoration: none;
             color: #444;
             margin-left: 20px;
@@ -52,6 +53,17 @@
 
         nav a:hover {
             color: #ff4e8c;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
         }
 
         .hero {
@@ -123,6 +135,14 @@
             margin-top: 30px;
         }
     </style>
+    <script>
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById("cartBadge").innerText = totalItems;
+        }
+        window.onload = updateCartBadge;
+    </script>
 </head>
 <body>
 
@@ -134,7 +154,7 @@
         <nav>
             <a href="index.html">Home</a>
             <a href="shop.html">Shop</a>
-            <a href="cart.html">Cart</a>
+            <a href="cart.html">Cart <span id="cartBadge" class="cart-badge">0</span></a>
             <a href="contact.html">Contact</a>
         </nav>
     </header>
@@ -167,4 +187,4 @@
     </footer>
 
 </body>
-  </html>
+</html>
