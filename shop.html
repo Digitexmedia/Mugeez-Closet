@@ -1,181 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - MUGEEZ CLOSET</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background: #f9f9f9;
-            color: #222;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop - MUGEEZ CLOSET</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+    body {
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+        background: #f9f9f9;
+        color: #222;
+    }
 
-        header {
-            background: white;
-            padding: 15px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    /* HEADER */
+    header {
+        background: white;
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
-        .logo {
-            height: 50px;
-            border-radius: 8px;
-        }
+    .logo {
+        height: 50px;
+        border-radius: 8px;
+    }
 
-        header h1 {
-            font-weight: 800;
-            font-size: 24px;
-        }
+    header h1 {
+        font-weight: 800;
+        font-size: 22px;
+    }
 
-        nav a {
-            text-decoration: none;
-            color: #444;
-            margin-left: 20px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
+    /* NAVIGATION */
+    nav {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
 
-        nav a:hover {
-            color: #ff4e8c;
-        }
+    nav a {
+        text-decoration: none;
+        color: #444;
+        font-weight: 600;
+        font-size: 15px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        position: relative;
+    }
 
-        .shop {
-            padding: 50px 10%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
+    nav a:hover {
+        background: #ff4e8c;
+        color: white;
+        box-shadow: 0 4px 12px rgba(255, 78, 140, 0.3);
+    }
 
-        .product {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            display: flex;
+    nav a.active {
+        background: #ff4e8c;
+        color: white;
+        box-shadow: 0 4px 12px rgba(255, 78, 140, 0.3);
+    }
+
+    /* CART BADGE */
+    .cart-badge {
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: red;
+        color: white;
+        font-size: 11px;
+        padding: 2px 5px;
+        border-radius: 50%;
+    }
+
+    /* MOBILE MENU */
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+    }
+
+    .menu-toggle div {
+        width: 25px;
+        height: 3px;
+        background: #444;
+        border-radius: 3px;
+    }
+
+    @media (max-width: 768px) {
+        nav {
+            display: none;
             flex-direction: column;
-        }
-
-        .product img {
-            width: 100%;
-            height: 280px;
-            object-fit: cover;
-        }
-
-        .product-details {
+            background: white;
+            position: absolute;
+            top: 70px;
+            right: 5%;
+            width: 200px;
             padding: 15px;
-            flex: 1;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        nav.active {
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
 
-        .product-details h3 {
-            margin: 0;
-            font-size: 18px;
+        .menu-toggle {
+            display: flex;
+        }
+    }
+
+    /* SHOP PRODUCTS */
+    .shop {
+        padding: 50px 10%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+
+    .product {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+    }
+
+    .product-details {
+        padding: 15px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .product-details h3 {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .product-details p {
+        color: #ff4e8c;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+
+    button {
+        padding: 10px;
+        border: none;
+        background: #ff4e8c;
+        color: white;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ff256e;
+    }
+
+    .checkout-btn {
+        display: block;
+        width: 200px;
+        margin: 30px auto;
+        text-align: center;
+        padding: 12px;
+        background: #222;
+        color: white;
+        font-weight: 600;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .checkout-btn:hover {
+        background: #ff4e8c;
+    }
+</style>
+
+<script>
+    function loadProducts() {
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+        let shopContainer = document.getElementById("shop");
+
+        shopContainer.innerHTML = "";
+
+        if (products.length === 0) {
+            shopContainer.innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>No products available. Please add from Admin Dashboard.</p>";
+            return;
         }
 
-        .product-details p {
-            color: #ff4e8c;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        button {
-            padding: 10px;
-            border: none;
-            background: #ff4e8c;
-            color: white;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #ff256e;
-        }
-    </style>
-
-    <script>
-        function loadProducts() {
-            let products = JSON.parse(localStorage.getItem("products")) || [];
-            let shopContainer = document.getElementById("shop");
-
-            shopContainer.innerHTML = "";
-
-            if (products.length === 0) {
-                shopContainer.innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>No products available. Please add from Admin Dashboard.</p>";
-                return;
-            }
-
-            products.forEach((p, index) => {
-                let productCard = `
-                    <div class="product">
-                        <img src="${p.image}" alt="${p.name}">
-                        <div class="product-details">
-                            <h3>${p.name}</h3>
-                            <p>₵${p.price}</p>
-                            <button onclick="addToCart('${p.name}', ${p.price}, '${p.image}')">Add to Cart</button>
-                        </div>
+        products.forEach((p) => {
+            let productCard = `
+                <div class="product">
+                    <img src="${p.image}" alt="${p.name}">
+                    <div class="product-details">
+                        <h3>${p.name}</h3>
+                        <p>₵${p.price}</p>
+                        <button onclick="addToCart('${p.name}', ${p.price}, '${p.image}')">Add to Cart</button>
                     </div>
-                `;
-                shopContainer.innerHTML += productCard;
-            });
+                </div>
+            `;
+            shopContainer.innerHTML += productCard;
+        });
+    }
+
+    function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let existing = cart.find(item => item.name === name);
+
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push({ name, price, image, quantity: 1 });
         }
 
-        function addToCart(name, price, image) {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            let existing = cart.find(item => item.name === name);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartBadge();
+        alert("Product added to cart!");
+    }
 
-            if (existing) {
-                existing.quantity += 1;
-            } else {
-                cart.push({ name, price, image, quantity: 1 });
-            }
+    function updateCartBadge() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        document.getElementById("cartBadge").innerText = totalItems;
+    }
 
-            localStorage.setItem("cart", JSON.stringify(cart));
-            alert("Product added to cart!");
-        }
+    function toggleMenu() {
+        document.querySelector("nav").classList.toggle("active");
+    }
 
-        window.onload = loadProducts;
-    </script>
+    window.onload = function() {
+        loadProducts();
+        updateCartBadge();
+    };
+</script>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <img src="https://files.catbox.moe/pbv0rg.jpg" alt="MUGEEZ CLOSET Logo" class="logo">
-            <h1>MUGEEZ CLOSET</h1>
-        </div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="cart.html">Cart</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+<header>
+    <div class="logo-container">
+        <img src="https://files.catbox.moe/pbv0rg.jpg" alt="MUGEEZ CLOSET Logo" class="logo">
+        <h1>MUGEEZ CLOSET</h1>
+    </div>
 
-    <section class="shop" id="shop">
-        <!-- Products will load here dynamically -->
-    </section>
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
-    <footer style="text-align: center; padding: 20px;">
-        <p>&copy; 2025 MUGEEZ CLOSET | Fashion for the Modern You</p>
-    </footer>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="shop.html" class="active">Shop</a>
+        <a href="cart.html">Cart <span id="cartBadge" class="cart-badge">0</span></a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="shop" id="shop">
+    <!-- Products will load dynamically -->
+</section>
+
+<a href="cart.html" class="checkout-btn">Proceed to Checkout</a>
+
+<footer style="text-align: center; padding: 20px;">
+    <p>&copy; 2025 MUGEEZ CLOSET | Fashion for the Modern You</p>
+</footer>
 
 </body>
 </html>
