@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MUGEEZ CLOSET</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #f9f9f9;
+        }
+
+        header {
+            background: white;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ff4e8c;
+        }
+
+        .container {
+            padding: 30px 10%;
+        }
+
+        h2 {
+            color: #ff4e8c;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-family: inherit;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            border: none;
+            background: #ff4e8c;
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #ff256e;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #ff4e8c;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+
+        .delete-btn {
+            background: red;
+        }
+    </style>
+
+    <script>
+        // Protect the page: redirect if not logged in
+        if (localStorage.getItem("isAdmin") !== "true") {
+            window.location.href = "admin-login.html";
+        }
+
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+
+        function saveProducts() {
+            localStorage.setItem("products", JSON.stringify(products));
+            loadProducts();
+        }
+
+        function addProduct() {
+            let name = document.getElementById("pname").value;
+            let price = document.getElementById("pprice").value;
+            let image = document.getElementById("pimage").value;
+
+            if (!name || !price || !image) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            products.push({ name, price: parseFloat(price), image });
+            saveProducts();
+
+            document.getElementById("pname").value = "";
+            document.getElementById("pprice").value = "";
+            document.getElementById("pimage").value = "";
+        }
+
+        function deleteProduct(index) {
+            products.splice(index, 1);
+            saveProducts();
+        }
+
+        function loadProducts() {
+            let table = document.getElementById("productTable");
+            table.innerHTML = "";
+
+            products.forEach((p, i) => {
+                table.innerHTML += `
+                    <tr>
+                        <td><img src="${p.image}" width="50"></td>
+                        <td>${p.name}</td>
+                        <td>$${p.price}</td>
+                        <td>
+                            <button class="delete-btn" onclick="deleteProduct(${i})">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem("isAdmin");
+            window.location.href = "admin-login.html";
+        }
+
+        window.onload = loadProducts;
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://files.catbox.moe/pbv0rg.jpg" alt="Logo" class="logo">
+            <h1>Admin Dashboard</h1>
+        </div>
+        <a href="#" onclick="logout()" style="color:red; font-weight:bold;">Logout</a>
+    </header>
+
+    <div class="container">
+        <h2>Add New Product</h2>
+        <input type="text" id="pname" placeholder="Product Name">
+        <input type="number" id="pprice" placeholder="Product Price">
+        <input type="text" id="pimage" placeholder="Image URL">
+        <button onclick="addProduct()">Add Product</button>
+
+        <h2>Product List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="productTable"></tbody>
+        </table>
+    </div>
+
+</body>
+</html>
